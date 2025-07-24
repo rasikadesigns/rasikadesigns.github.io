@@ -1,36 +1,642 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="John Designer - Creative UI/UX Designer & Frontend Developer Portfolio" />
-    <meta name="keywords" content="UI/UX Designer, Frontend Developer, Portfolio, React, Design" />
-    <meta name="author" content="John Designer" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rasika - Creative UI/UX Designer & Frontend Developer Portfolio">
+    <meta name="keywords" content="UI/UX Designer, Frontend Developer, Portfolio, Design">
+    <meta name="author" content="Rasika">
     
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://yourusername.github.io/portfolio/" />
-    <meta property="og:title" content="John Designer - UI/UX Designer & Frontend Developer" />
-    <meta property="og:description" content="Creative UI/UX Designer & Frontend Developer crafting beautiful digital experiences" />
-    <meta property="og:image" content="https://yourusername.github.io/portfolio/og-image.jpg" />
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rasikadesigns.github.io/portfolio/">
+    <meta property="og:title" content="Rasika - UI/UX Designer & Frontend Developer">
+    <meta property="og:description" content="Creative UI/UX Designer & Frontend Developer crafting beautiful digital experiences">
+    <meta property="og:image" content="https://rasikadesigns.github.io/portfolio/og-image.jpg">
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://yourusername.github.io/portfolio/" />
-    <meta property="twitter:title" content="John Designer - UI/UX Designer & Frontend Developer" />
-    <meta property="twitter:description" content="Creative UI/UX Designer & Frontend Developer crafting beautiful digital experiences" />
-    <meta property="twitter:image" content="https://yourusername.github.io/portfolio/og-image.jpg" />
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://rasikadesigns.github.io/portfolio/">
+    <meta property="twitter:title" content="Rasika - UI/UX Designer & Frontend Developer">
+    <meta property="twitter:description" content="Creative UI/UX Designer & Frontend Developer crafting beautiful digital experiences">
+    <meta property="twitter:image" content="https://rasikadesigns.github.io/portfolio/og-image.jpg">
 
-    <!-- Preconnect to external domains -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <title>John Designer - UI/UX Designer & Frontend Developer</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/main.tsx"></script>
-  </body>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/animations.css">
+    
+    <title>Rasika - UI/UX Designer & Frontend Developer</title>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div id="progress-bar" class="progress-bar"></div>
+    
+    <!-- Floating Elements -->
+    <div class="floating-elements">
+        <div class="floating-orb orb-1"></div>
+        <div class="floating-orb orb-2"></div>
+        <div class="floating-orb orb-3"></div>
+        <div class="floating-orb orb-4"></div>
+        <div class="floating-orb orb-5"></div>
+        <div class="floating-orb orb-6"></div>
+        <div class="floating-orb orb-7"></div>
+        <div class="floating-orb orb-8"></div>
+        <div class="gradient-orb gradient-orb-1"></div>
+        <div class="gradient-orb gradient-orb-2"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo" onclick="scrollToSection('hero')">
+                    <div class="logo-icon">
+                        <span>R</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="nav-desktop">
+                    <button class="nav-link" onclick="scrollToSection('hero')">
+                        Home
+                        <span class="nav-underline"></span>
+                    </button>
+                    <button class="nav-link" onclick="scrollToSection('about')">
+                        About
+                        <span class="nav-underline"></span>
+                    </button>
+                    <button class="nav-link" onclick="scrollToSection('projects')">
+                        Projects
+                        <span class="nav-underline"></span>
+                    </button>
+                    <button class="nav-link" onclick="scrollToSection('skills')">
+                        Skills
+                        <span class="nav-underline"></span>
+                    </button>
+                    <button class="nav-link" onclick="scrollToSection('contact')">
+                        Contact
+                        <span class="nav-underline"></span>
+                    </button>
+                </nav>
+
+                <div class="header-actions">
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="theme-toggle" onclick="toggleDarkMode()">
+                        <span class="theme-icon sun-icon">☀️</span>
+                        <span class="theme-icon moon-icon">🌙</span>
+                    </button>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button id="mobile-menu-toggle" class="mobile-menu-toggle">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <nav id="mobile-nav" class="nav-mobile">
+                <button class="nav-link-mobile" onclick="scrollToSection('hero')">Home</button>
+                <button class="nav-link-mobile" onclick="scrollToSection('about')">About</button>
+                <button class="nav-link-mobile" onclick="scrollToSection('projects')">Projects</button>
+                <button class="nav-link-mobile" onclick="scrollToSection('skills')">Skills</button>
+                <button class="nav-link-mobile" onclick="scrollToSection('contact')">Contact</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <!-- Avatar -->
+                    <div class="hero-avatar">
+                        <div class="avatar-gradient">
+                            <div class="avatar-inner">
+                                <span class="avatar-emoji">👩‍💻</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Heading -->
+                    <h1 class="hero-title">Rasika</h1>
+
+                    <!-- Subtitle -->
+                    <p class="hero-subtitle">Creative UI/UX Designer & Frontend Developer</p>
+
+                    <!-- Description -->
+                    <p class="hero-description">
+                        I craft beautiful, functional, and user-centered digital experiences. 
+                        Passionate about creating interfaces that users love and businesses need.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="scrollToSection('projects')">
+                            View My Work
+                        </button>
+                        <button class="btn btn-secondary" onclick="scrollToSection('contact')">
+                            Let's Talk
+                        </button>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="hero-social">
+                        <a href="mailto:rasika@example.com" class="social-link">
+                            <span class="social-icon">📧</span>
+                        </a>
+                        <a href="https://linkedin.com/in/rasika" class="social-link">
+                            <span class="social-icon">💼</span>
+                        </a>
+                        <a href="https://github.com/rasikadesigns" class="social-link">
+                            <span class="social-icon">💻</span>
+                        </a>
+                    </div>
+
+                    <!-- Scroll Indicator -->
+                    <div class="scroll-indicator" onclick="scrollToSection('about')">
+                        <span class="scroll-arrow">↓</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2>About Me</h2>
+                    <p>I'm a passionate designer and developer with a love for creating meaningful digital experiences</p>
+                </div>
+
+                <div class="about-content">
+                    <!-- Text Content -->
+                    <div class="about-text">
+                        <div class="about-paragraphs">
+                            <p>
+                                Hello! I'm Rasika, a UI/UX designer and frontend developer passionate about creating 
+                                intuitive, beautiful, and functional digital products that solve real-world problems.
+                            </p>
+                            <p>
+                                With a keen eye for detail and a love for clean, modern design, I specialize in 
+                                transforming complex ideas into simple, elegant solutions. My approach combines 
+                                creative thinking with technical expertise to deliver exceptional user experiences.
+                            </p>
+                            <p>
+                                When I'm not designing or coding, you can find me exploring new design trends, 
+                                experimenting with creative projects, or contributing to the design community.
+                            </p>
+                        </div>
+
+                        <div class="expertise">
+                            <h3>Expertise</h3>
+                            <div class="expertise-tags">
+                                <span class="tag">User Experience Design</span>
+                                <span class="tag">User Interface Design</span>
+                                <span class="tag">Prototyping</span>
+                                <span class="tag">Design Systems</span>
+                                <span class="tag">Frontend Development</span>
+                                <span class="tag">React & Next.js</span>
+                                <span class="tag">Figma & Adobe XD</span>
+                                <span class="tag">Creative Problem Solving</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">🏆</div>
+                            <div class="stat-value">3+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">☕</div>
+                            <div class="stat-value">50+</div>
+                            <div class="stat-label">Projects Completed</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📍</div>
+                            <div class="stat-value">30+</div>
+                            <div class="stat-label">Happy Clients</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📅</div>
+                            <div class="stat-value">5+</div>
+                            <div class="stat-label">Awards Won</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Featured Projects</h2>
+                    <p>A showcase of my recent work, demonstrating expertise in design and development</p>
+                </div>
+
+                <div class="projects-container">
+                    <div class="project-card featured">
+                        <div class="project-badge">Featured</div>
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="E-Commerce Dashboard">
+                            <div class="project-overlay">
+                                <a href="#" class="project-link">
+                                    <span class="link-icon">🔗</span>
+                                    Live Demo
+                                </a>
+                                <a href="https://github.com/rasikadesigns" class="project-link">
+                                    <span class="link-icon">💻</span>
+                                    Code
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>E-Commerce Dashboard</h3>
+                            <p>A comprehensive admin dashboard for e-commerce businesses with real-time analytics, inventory management, and customer insights.</p>
+                            <div class="project-tags">
+                                <span class="tag">React</span>
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">Tailwind CSS</span>
+                                <span class="tag">Chart.js</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card featured">
+                        <div class="project-badge">Featured</div>
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop" alt="Mobile Banking App">
+                            <div class="project-overlay">
+                                <a href="#" class="project-link">
+                                    <span class="link-icon">🔗</span>
+                                    Live Demo
+                                </a>
+                                <a href="https://github.com/rasikadesigns" class="project-link">
+                                    <span class="link-icon">💻</span>
+                                    Code
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Mobile Banking App</h3>
+                            <p>A modern mobile banking application with intuitive UX, biometric authentication, and seamless transaction management.</p>
+                            <div class="project-tags">
+                                <span class="tag">React Native</span>
+                                <span class="tag">UI/UX</span>
+                                <span class="tag">Figma</span>
+                                <span class="tag">Prototyping</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=600&fit=crop" alt="SaaS Landing Page">
+                            <div class="project-overlay">
+                                <a href="#" class="project-link">
+                                    <span class="link-icon">🔗</span>
+                                    Live Demo
+                                </a>
+                                <a href="https://github.com/rasikadesigns" class="project-link">
+                                    <span class="link-icon">💻</span>
+                                    Code
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>SaaS Landing Page</h3>
+                            <p>High-converting landing page for a SaaS product with modern design, smooth animations, and optimized conversion funnels.</p>
+                            <div class="project-tags">
+                                <span class="tag">Next.js</span>
+                                <span class="tag">Framer Motion</span>
+                                <span class="tag">SEO</span>
+                                <span class="tag">Conversion Optimization</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop" alt="Task Management Tool">
+                            <div class="project-overlay">
+                                <a href="#" class="project-link">
+                                    <span class="link-icon">🔗</span>
+                                    Live Demo
+                                </a>
+                                <a href="https://github.com/rasikadesigns" class="project-link">
+                                    <span class="link-icon">💻</span>
+                                    Code
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Task Management Tool</h3>
+                            <p>Collaborative task management platform with real-time updates, team collaboration features, and productivity analytics.</p>
+                            <div class="project-tags">
+                                <span class="tag">Vue.js</span>
+                                <span class="tag">Node.js</span>
+                                <span class="tag">Socket.io</span>
+                                <span class="tag">MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1586717799252-bd134ad00e26?w=800&h=600&fit=crop" alt="Portfolio Website">
+                            <div class="project-overlay">
+                                <a href="#" class="project-link">
+                                    <span class="link-icon">🔗</span>
+                                    Live Demo
+                                </a>
+                                <a href="https://github.com/rasikadesigns" class="project-link">
+                                    <span class="link-icon">💻</span>
+                                    Code
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Portfolio Website</h3>
+                            <p>Creative portfolio website for a photographer with stunning gallery layouts and smooth user experience.</p>
+                            <div class="project-tags">
+                                <span class="tag">React</span>
+                                <span class="tag">GSAP</span>
+                                <span class="tag">Photography</span>
+                                <span class="tag">Creative Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="projects-footer">
+                    <button class="btn btn-secondary">View All Projects</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Skills & Expertise</h2>
+                    <p>A comprehensive overview of my technical skills and creative abilities</p>
+                </div>
+
+                <div class="skills-content">
+                    <!-- Technical Skills -->
+                    <div class="skill-category">
+                        <h3>Technical Skills</h3>
+                        <div class="skill-circles">
+                            <div class="skill-circle">
+                                <div class="circle-progress" data-percentage="95" data-color="#3B82F6">
+                                    <svg>
+                                        <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                                        <circle class="circle-fill" cx="60" cy="60" r="50"></circle>
+                                    </svg>
+                                    <span class="percentage">95%</span>
+                                </div>
+                                <p>UI/UX Design</p>
+                            </div>
+                            <div class="skill-circle">
+                                <div class="circle-progress" data-percentage="88" data-color="#8B5CF6">
+                                    <svg>
+                                        <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                                        <circle class="circle-fill" cx="60" cy="60" r="50"></circle>
+                                    </svg>
+                                    <span class="percentage">88%</span>
+                                </div>
+                                <p>React/Next.js</p>
+                            </div>
+                            <div class="skill-circle">
+                                <div class="circle-progress" data-percentage="82" data-color="#06B6D4">
+                                    <svg>
+                                        <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                                        <circle class="circle-fill" cx="60" cy="60" r="50"></circle>
+                                    </svg>
+                                    <span class="percentage">82%</span>
+                                </div>
+                                <p>TypeScript</p>
+                            </div>
+                            <div class="skill-circle">
+                                <div class="circle-progress" data-percentage="96" data-color="#EC4899">
+                                    <svg>
+                                        <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                                        <circle class="circle-fill" cx="60" cy="60" r="50"></circle>
+                                    </svg>
+                                    <span class="percentage">96%</span>
+                                </div>
+                                <p>Figma/XD</p>
+                            </div>
+                            <div class="skill-circle">
+                                <div class="circle-progress" data-percentage="90" data-color="#10B981">
+                                    <svg>
+                                        <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                                        <circle class="circle-fill" cx="60" cy="60" r="50"></circle>
+                                    </svg>
+                                    <span class="percentage">90%</span>
+                                </div>
+                                <p>Tailwind CSS</p>
+                            </div>
+                            <div class="skill-circle">
+                                <div class="circle-progress" data-percentage="75" data-color="#F59E0B">
+                                    <svg>
+                                        <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                                        <circle class="circle-fill" cx="60" cy="60" r="50"></circle>
+                                    </svg>
+                                    <span class="percentage">75%</span>
+                                </div>
+                                <p>Node.js</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soft Skills -->
+                    <div class="skill-category">
+                        <h3>Soft Skills</h3>
+                        <div class="soft-skills">
+                            <div class="soft-skill">
+                                <span class="skill-dot"></span>
+                                <span>Creative Problem Solving</span>
+                            </div>
+                            <div class="soft-skill">
+                                <span class="skill-dot"></span>
+                                <span>User Empathy</span>
+                            </div>
+                            <div class="soft-skill">
+                                <span class="skill-dot"></span>
+                                <span>Team Collaboration</span>
+                            </div>
+                            <div class="soft-skill">
+                                <span class="skill-dot"></span>
+                                <span>Project Management</span>
+                            </div>
+                            <div class="soft-skill">
+                                <span class="skill-dot"></span>
+                                <span>Communication</span>
+                            </div>
+                            <div class="soft-skill">
+                                <span class="skill-dot"></span>
+                                <span>Attention to Detail</span>
+                            </div>
+                            <div class="soft-skill">
+                                <span class="skill-dot"></span>
+                                <span>Continuous Learning</span>
+                            </div>
+                            <div class="soft-skill">
+                                <span class="skill-dot"></span>
+                                <span>Design Thinking</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Design Tools -->
+                    <div class="skill-category">
+                        <h3>Design Tools</h3>
+                        <div class="design-tools">
+                            <div class="tool">
+                                <span class="tool-icon">🎨</span>
+                                <span>Figma</span>
+                            </div>
+                            <div class="tool">
+                                <span class="tool-icon">🔧</span>
+                                <span>Adobe XD</span>
+                            </div>
+                            <div class="tool">
+                                <span class="tool-icon">✏️</span>
+                                <span>Sketch</span>
+                            </div>
+                            <div class="tool">
+                                <span class="tool-icon">🖼️</span>
+                                <span>Photoshop</span>
+                            </div>
+                            <div class="tool">
+                                <span class="tool-icon">🎭</span>
+                                <span>Illustrator</span>
+                            </div>
+                            <div class="tool">
+                                <span class="tool-icon">🎬</span>
+                                <span>After Effects</span>
+                            </div>
+                            <div class="tool">
+                                <span class="tool-icon">⚡</span>
+                                <span>Principle</span>
+                            </div>
+                            <div class="tool">
+                                <span class="tool-icon">👁️</span>
+                                <span>InVision</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Let's Work Together</h2>
+                    <p>Have a project in mind? I'd love to hear about it. Let's discuss how we can bring your ideas to life.</p>
+                </div>
+
+                <div class="contact-content">
+                    <!-- Contact Form -->
+                    <div class="contact-form-container">
+                        <h3>Send me a message</h3>
+                        <form id="contact-form" class="contact-form">
+                            <div class="form-row">
+                                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                            </div>
+                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                            <textarea id="message" name="message" placeholder="Your Message" rows="6" required></textarea>
+                            <button type="submit" class="btn btn-primary form-submit">
+                                <span class="btn-text">Send Message</span>
+                                <span class="btn-loading">Sending...</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="contact-info">
+                        <!-- Contact Details -->
+                        <div class="contact-details">
+                            <a href="mailto:rasika@example.com" class="contact-item">
+                                <div class="contact-icon">📧</div>
+                                <div class="contact-text">
+                                    <h4>Email</h4>
+                                    <p>rasika@example.com</p>
+                                </div>
+                            </a>
+                            <a href="tel:+15551234567" class="contact-item">
+                                <div class="contact-icon">📞</div>
+                                <div class="contact-text">
+                                    <h4>Phone</h4>
+                                    <p>+1 (555) 123-4567</p>
+                                </div>
+                            </a>
+                            <a href="https://maps.google.com" class="contact-item">
+                                <div class="contact-icon">📍</div>
+                                <div class="contact-text">
+                                    <h4>Location</h4>
+                                    <p>Available Worldwide</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Social Links -->
+                        <div class="contact-social">
+                            <h4>Follow me</h4>
+                            <div class="social-links">
+                                <a href="https://github.com/rasikadesigns" class="social-link">
+                                    <span class="social-icon">💻</span>
+                                </a>
+                                <a href="https://linkedin.com/in/rasika" class="social-link">
+                                    <span class="social-icon">💼</span>
+                                </a>
+                                <a href="https://twitter.com/rasika" class="social-link">
+                                    <span class="social-icon">🐦</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Call to Action -->
+                        <div class="contact-cta">
+                            <h4>Ready to start a project?</h4>
+                            <p>
+                                I'm always interested in new opportunities and exciting projects. 
+                                Let's discuss how we can work together to create something amazing.
+                            </p>
+                            <button class="btn btn-secondary">Schedule a Call</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span id="toast-message"></span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./js/main.js"></script>
+    <script src="./js/animations.js"></script>
+</body>
 </html>
