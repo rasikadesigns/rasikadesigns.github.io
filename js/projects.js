@@ -169,6 +169,34 @@ const projects = [
             "Payment integration",
             "User reviews"
         ]
+    },
+    {
+    id: 6,
+    title: "Wealth Management App",
+    description: "Managing wealth ani barach kahi",
+    category: "Web Design",
+    tags: ["Flutter", "Firebase", "UI/UX", "FinTech"],
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop",
+    featured: true,
+    demoUrl: "https://www.figma.com/proto/vZo2nCGRH7Ol9uwce77Pcs/Wealth-Craft?page-id=461%3A504&node-id=461-1386&viewport=754%2C563%2C0.09&t=klhCtuH8nAXYrW2d-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=461%3A4162&show-proto-sidebar=1",
+    codeUrl: "https://github.com/rasikadesigns/restaurant-app",
+    status: "in-progress",
+    year: 2024,
+    client: "Hota koni tari",
+    duration: "3 months",
+    technologies: [
+        { name: "Flutter", icon: "💙" },
+        { name: "Firebase", icon: "🔥" },
+        { name: "UI/UX Design", icon: "✨" },
+        { name: "FinTech", icon: "" }
+    ],
+    features: [
+        "Paishe sambhalne",
+        "Paishe kamavne",
+        "Paishe sathavne",
+        "Paishe kharch karne",
+        "Paishancha maaz karne"
+    ]
     }
 ];
 
