@@ -1,243 +1,327 @@
-// Portfolio Website JavaScript
-
 // Global state
-let isDarkMode = localStorage.getItem('darkMode') === 'true' || false;
-let isMobileMenuOpen = false;
+let isDarkMode = localStorage.getItem('darkMode') === 'true';
 
-// DOM Elements
-const header = document.querySelector('.header');
-const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-const mobileNav = document.getElementById('mobile-nav');
-const themeToggle = document.getElementById('theme-toggle');
-const progressBar = document.getElementById('progress-bar');
-const contactForm = document.getElementById('contact-form');
-const toast = document.getElementById('toast');
-
-// Initialize the application
+// Initialize the website
 document.addEventListener('DOMContentLoaded', function() {
     initializeTheme();
-    initializeScrollProgress();
-    initializeScrollAnimations();
-    initializeMobileMenu();
+    initializeNavigation();
+    initializeAnimations();
+    initializeProjects();
+    initializeSkills();
     initializeContactForm();
-    initializeSkillCircles();
-    initializeParallax();
-    
-    // Add smooth scrolling to navigation links
-    document.addEventListener('click', handleNavigation);
-    
-    // Handle scroll events
-    window.addEventListener('scroll', throttle(handleScroll, 16));
-    
-    // Handle resize events
-    window.addEventListener('resize', throttle(handleResize, 100));
+    initializeScrollProgress();
 });
 
-// Theme Management
-function initializeTheme() {
-    if (isDarkMode) {
-        document.documentElement.classList.add('dark');
-    }
-    updateThemeIcon();
-}
-
+// Theme management
 function toggleDarkMode() {
     isDarkMode = !isDarkMode;
-    document.documentElement.classList.toggle('dark');
     localStorage.setItem('darkMode', isDarkMode);
-    updateThemeIcon();
-    
-    // Add a subtle animation to the theme toggle
-    themeToggle.style.transform = 'scale(0.9)';
-    setTimeout(() => {
-        themeToggle.style.transform = 'scale(1)';
-    }, 150);
+    updateTheme();
 }
 
-function updateThemeIcon() {
-    const sunIcon = themeToggle.querySelector('.sun-icon');
-    const moonIcon = themeToggle.querySelector('.moon-icon');
+function initializeTheme() {
+    updateTheme();
+}
+
+function updateTheme() {
+    const body = document.body;
+    const themeToggle = document.getElementById('theme-toggle');
     
     if (isDarkMode) {
-        sunIcon.style.transform = 'translate(-50%, -50%) rotate(180deg)';
-        sunIcon.style.opacity = '0';
-        moonIcon.style.transform = 'translate(-50%, -50%) rotate(0deg)';
-        moonIcon.style.opacity = '1';
+        body.classList.add('dark');
+        themeToggle?.classList.add('dark');
     } else {
-        sunIcon.style.transform = 'translate(-50%, -50%) rotate(0deg)';
-        sunIcon.style.opacity = '1';
-        moonIcon.style.transform = 'translate(-50%, -50%) rotate(-180deg)';
-        moonIcon.style.opacity = '0';
+        body.classList.remove('dark');
+        themeToggle?.classList.remove('dark');
     }
 }
 
-// Scroll Progress Bar
-function initializeScrollProgress() {
-    updateScrollProgress();
-}
-
-function updateScrollProgress() {
-    const scrolled = window.scrollY;
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = (scrolled / maxScroll) * 100;
+// Navigation
+function initializeNavigation() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
     
-    if (progressBar) {
-        progressBar.style.width = `${Math.min(progress, 100)}%`;
-    }
-}
+    mobileMenuToggle?.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mobileNav?.classList.toggle('active');
+    });
 
-// Mobile Menu
-function initializeMobileMenu() {
-    if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', toggleMobileMenu);
-    }
-    
-    // Close mobile menu when clicking on navigation links
-    document.querySelectorAll('.nav-link-mobile').forEach(link => {
-        link.addEventListener('click', () => {
-            if (isMobileMenuOpen) {
-                toggleMobileMenu();
-            }
+    // Close mobile menu when clicking on a link
+    const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenuToggle?.classList.remove('active');
+            mobileNav?.classList.remove('active');
         });
+    });
+
+    // Update active navigation on scroll
+    window.addEventListener('scroll', updateActiveNavigation);
+}
+
+function updateActiveNavigation() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.scrollY >= (sectionTop - 200)) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('onclick')?.includes(current)) {
+            link.classList.add('active');
+        }
     });
 }
 
-function toggleMobileMenu() {
-    isMobileMenuOpen = !isMobileMenuOpen;
-    
-    if (mobileMenuToggle) {
-        mobileMenuToggle.classList.toggle('active');
-    }
-    
-    if (mobileNav) {
-        mobileNav.classList.toggle('active');
-        
-        // Animate menu items
-        const navItems = mobileNav.querySelectorAll('.nav-link-mobile');
-        navItems.forEach((item, index) => {
-            if (isMobileMenuOpen) {
-                item.style.animationDelay = `${index * 0.1}s`;
-                item.classList.add('animate-slide-in-up');
-            } else {
-                item.classList.remove('animate-slide-in-up');
-            }
-        });
-    }
-}
-
-// Navigation and Smooth Scrolling
-function handleNavigation(event) {
-    const target = event.target.closest('[onclick*="scrollToSection"]');
-    if (target) {
-        event.preventDefault();
-        const sectionId = target.getAttribute('onclick').match(/'([^']+)'/)[1];
-        scrollToSection(sectionId);
-    }
-}
-
+// Smooth scrolling
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
     if (section) {
-        const headerHeight = header ? header.offsetHeight : 0;
-        const targetPosition = section.offsetTop - headerHeight;
-        
-        window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
+        section.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
         });
-        
-        // Update active navigation state
-        updateActiveNavigation(sectionId);
     }
 }
 
-function updateActiveNavigation(activeSection) {
-    // Remove active class from all nav links
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-    });
+// Projects functionality
+function initializeProjects() {
+    if (typeof projects === 'undefined') {
+        console.warn('Projects data not loaded. Make sure projects.js is included.');
+        return;
+    }
     
-    // Add active class to current section link
-    const activeLink = document.querySelector(`[onclick*="${activeSection}"]`);
-    if (activeLink) {
-        activeLink.classList.add('active');
+    renderProjects();
+    initializeProjectFilters();
+}
+
+function renderProjects(filteredProjects = projects) {
+    const projectsContainer = document.querySelector('.projects-container');
+    if (!projectsContainer) return;
+
+    projectsContainer.innerHTML = '';
+
+    filteredProjects.forEach(project => {
+        const projectCard = createProjectCard(project);
+        projectsContainer.appendChild(projectCard);
+    });
+
+    // Re-initialize animations for new elements
+    initializeProjectAnimations();
+}
+
+function createProjectCard(project) {
+    const card = document.createElement('div');
+    card.className = `project-card ${project.featured ? 'featured' : ''}`;
+    card.setAttribute('data-category', project.category.toLowerCase().replace(/\s+/g, '-'));
+    card.setAttribute('data-year', project.year);
+    card.setAttribute('data-status', project.status);
+
+    card.innerHTML = `
+        ${project.featured ? '<div class="project-badge">Featured</div>' : ''}
+        <div class="project-image">
+            <img src="${project.image}" alt="${project.title}" loading="lazy">
+            <div class="project-overlay">
+                ${project.demoUrl ? `
+                    <a href="${project.demoUrl}" class="project-link" target="_blank" rel="noopener noreferrer">
+                        <span class="link-icon">🔗</span>
+                        Live Demo
+                    </a>
+                ` : ''}
+                ${project.codeUrl ? `
+                    <a href="${project.codeUrl}" class="project-link" target="_blank" rel="noopener noreferrer">
+                        <span class="link-icon">💻</span>
+                        Code
+                    </a>
+                ` : ''}
+                <button class="project-link project-details-btn" onclick="openProjectModal(${project.id})">
+                    <span class="link-icon">👁️</span>
+                    Details
+                </button>
+            </div>
+        </div>
+        <div class="project-content">
+            <div class="project-meta">
+                <span class="project-year">${project.year}</span>
+                <span class="project-status status-${project.status}">${project.status.replace('-', ' ')}</span>
+            </div>
+            <h3>${project.title}</h3>
+            <p>${project.description}</p>
+            <div class="project-tags">
+                ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            </div>
+        </div>
+    `;
+
+    return card;
+}
+
+function initializeProjectFilters() {
+    const filtersContainer = document.querySelector('.project-filters');
+    if (!filtersContainer && typeof projectCategories !== 'undefined') {
+        createProjectFilters();
     }
 }
 
-// Scroll Animations
-function initializeScrollAnimations() {
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px 0px -10% 0px',
-        threshold: 0.1
+function createProjectFilters() {
+    const projectsSection = document.getElementById('projects');
+    const sectionHeader = projectsSection?.querySelector('.section-header');
+    
+    if (!sectionHeader) return;
+
+    const filtersContainer = document.createElement('div');
+    filtersContainer.className = 'project-filters';
+    
+    const filtersHTML = projectCategories.map(category => `
+        <button class="filter-btn ${category.id === 'all' ? 'active' : ''}" 
+                onclick="filterProjects('${category.id}')">
+            ${category.name} (${category.count})
+        </button>
+    `).join('');
+    
+    filtersContainer.innerHTML = filtersHTML;
+    sectionHeader.appendChild(filtersContainer);
+}
+
+function filterProjects(categoryId) {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => btn.classList.remove('active'));
+    
+    const activeBtn = document.querySelector(`[onclick="filterProjects('${categoryId}')"]`);
+    activeBtn?.classList.add('active');
+
+    let filteredProjects = projects;
+    
+    if (categoryId !== 'all') {
+        if (categoryId === 'ui-ux') {
+            filteredProjects = projects.filter(project => 
+                project.tags.some(tag => tag.toLowerCase().includes('ui/ux'))
+            );
+        } else {
+            const categoryName = categoryId.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+            filteredProjects = projects.filter(project => project.category === categoryName);
+        }
+    }
+
+    renderProjects(filteredProjects);
+}
+
+function openProjectModal(projectId) {
+    const project = projects.find(p => p.id === projectId);
+    if (!project) return;
+
+    const modal = createProjectModal(project);
+    document.body.appendChild(modal);
+    
+    // Animate modal in
+    setTimeout(() => modal.classList.add('active'), 10);
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+}
+
+function createProjectModal(project) {
+    const modal = document.createElement('div');
+    modal.className = 'project-modal';
+    modal.onclick = (e) => {
+        if (e.target === modal) closeProjectModal();
     };
+
+    modal.innerHTML = `
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+            
+            <div class="modal-header">
+                <img src="${project.image}" alt="${project.title}" class="modal-image">
+                <div class="modal-header-content">
+                    <h2>${project.title}</h2>
+                    <p class="modal-description">${project.description}</p>
+                    <div class="modal-meta">
+                        <span><strong>Year:</strong> ${project.year}</span>
+                        <span><strong>Client:</strong> ${project.client}</span>
+                        <span><strong>Duration:</strong> ${project.duration}</span>
+                        <span><strong>Status:</strong> <span class="status-${project.status}">${project.status.replace('-', ' ')}</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Technologies Used</h3>
+                    <div class="modal-technologies">
+                        ${project.technologies.map(tech => `
+                            <div class="tech-item">
+                                <span class="tech-icon">${tech.icon}</span>
+                                <span class="tech-name">${tech.name}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Key Features</h3>
+                    <ul class="modal-features">
+                        ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="modal-actions">
+                    ${project.demoUrl ? `
+                        <a href="${project.demoUrl}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                            View Live Demo
+                        </a>
+                    ` : ''}
+                    ${project.codeUrl ? `
+                        <a href="${project.codeUrl}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                            View Code
+                        </a>
+                    ` : ''}
+                </div>
+            </div>
+        </div>
+    `;
+
+    return modal;
+}
+
+function closeProjectModal() {
+    const modal = document.querySelector('.project-modal');
+    if (modal) {
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.remove();
+            document.body.style.overflow = '';
+        }, 300);
+    }
+}
+
+function initializeProjectAnimations() {
+    const projectCards = document.querySelectorAll('.project-card');
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
-                
-                // Animate children with stagger effect
-                const children = entry.target.querySelectorAll('[data-animate]');
-                children.forEach((child, index) => {
-                    setTimeout(() => {
-                        child.classList.add('animate');
-                    }, index * 100);
-                });
+                entry.target.classList.add('animate-in');
             }
         });
-    }, observerOptions);
-    
-    // Observe elements that should animate on scroll
-    const animateElements = document.querySelectorAll('.animate-on-scroll, .animate-on-scroll-left, .animate-on-scroll-right, .animate-on-scroll-scale');
-    animateElements.forEach(el => observer.observe(el));
-    
-    // Add animation classes to elements
-    addScrollAnimationClasses();
+    }, { threshold: 0.1 });
+
+    projectCards.forEach(card => {
+        observer.observe(card);
+    });
 }
 
-function addScrollAnimationClasses() {
-    // Hero section elements
-    const heroElements = document.querySelectorAll('.hero-content > *');
-    heroElements.forEach((el, index) => {
-        el.classList.add('animate-on-scroll');
-        el.style.animationDelay = `${index * 0.1}s`;
-    });
-    
-    // About section
-    const aboutText = document.querySelector('.about-text');
-    const aboutStats = document.querySelector('.about-stats');
-    if (aboutText) aboutText.classList.add('animate-on-scroll-left');
-    if (aboutStats) aboutStats.classList.add('animate-on-scroll-right');
-    
-    // Project cards
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach((card, index) => {
-        card.classList.add('animate-on-scroll-scale');
-        card.style.animationDelay = `${index * 0.1}s`;
-    });
-    
-    // Skill categories
-    const skillCategories = document.querySelectorAll('.skill-category');
-    skillCategories.forEach((category, index) => {
-        category.classList.add('animate-on-scroll');
-        category.style.animationDelay = `${index * 0.2}s`;
-    });
-    
-    // Contact form and info
-    const contactForm = document.querySelector('.contact-form-container');
-    const contactInfo = document.querySelector('.contact-info');
-    if (contactForm) contactForm.classList.add('animate-on-scroll-left');
-    if (contactInfo) contactInfo.classList.add('animate-on-scroll-right');
-}
-
-// Skills Circle Progress Animation
-function initializeSkillCircles() {
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.5
-    };
+// Skills functionality
+function initializeSkills() {
+    const skillCircles = document.querySelectorAll('.skill-circle');
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -245,184 +329,157 @@ function initializeSkillCircles() {
                 animateSkillCircle(entry.target);
             }
         });
-    }, observerOptions);
-    
-    const skillCircles = document.querySelectorAll('.circle-progress');
-    skillCircles.forEach(circle => observer.observe(circle));
+    }, { threshold: 0.5 });
+
+    skillCircles.forEach(circle => {
+        observer.observe(circle);
+    });
 }
 
-function animateSkillCircle(circleElement) {
-    const percentage = parseInt(circleElement.dataset.percentage);
-    const color = circleElement.dataset.color;
-    const circle = circleElement.querySelector('.circle-fill');
-    const percentageText = circleElement.querySelector('.percentage');
+function animateSkillCircle(skillCircle) {
+    const progressElement = skillCircle.querySelector('.circle-progress');
+    const circleElement = skillCircle.querySelector('.circle-fill');
+    const percentageElement = skillCircle.querySelector('.percentage');
     
-    if (circle && percentageText) {
-        // Set the stroke color
-        circle.style.stroke = color;
-        
-        // Calculate stroke dash offset
-        const circumference = 314; // 2 * π * 50 (radius)
-        const offset = circumference - (percentage / 100) * circumference;
-        
-        // Animate the circle
-        setTimeout(() => {
-            circle.style.strokeDashoffset = offset;
-        }, 200);
-        
-        // Animate the percentage counter
-        animateCounter(percentageText, 0, percentage, 1500);
-    }
-}
+    if (!progressElement || !circleElement || !percentageElement) return;
 
-function animateCounter(element, start, end, duration) {
-    const startTime = performance.now();
+    const percentage = parseInt(progressElement.dataset.percentage);
+    const color = progressElement.dataset.color;
+    const radius = 50;
+    const circumference = 2 * Math.PI * radius;
     
-    function updateCounter(currentTime) {
-        const elapsed = currentTime - startTime;
+    // Set up the circle
+    circleElement.style.strokeDasharray = circumference;
+    circleElement.style.strokeDashoffset = circumference;
+    circleElement.style.stroke = color;
+    
+    // Animate the circle
+    let currentPercentage = 0;
+    const duration = 2000; // 2 seconds
+    const startTime = Date.now();
+    
+    function animate() {
+        const elapsed = Date.now() - startTime;
         const progress = Math.min(elapsed / duration, 1);
         
-        // Easing function for smooth animation
-        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-        const current = Math.round(start + (end - start) * easeOutQuart);
+        currentPercentage = Math.floor(progress * percentage);
+        const offset = circumference - (progress * percentage / 100) * circumference;
         
-        element.textContent = `${current}%`;
+        circleElement.style.strokeDashoffset = offset;
+        percentageElement.textContent = `${currentPercentage}%`;
         
         if (progress < 1) {
-            requestAnimationFrame(updateCounter);
+            requestAnimationFrame(animate);
         }
     }
     
-    requestAnimationFrame(updateCounter);
+    animate();
 }
 
-// Contact Form Handling
+// Contact form functionality
 function initializeContactForm() {
-    if (contactForm) {
-        contactForm.addEventListener('submit', handleFormSubmit);
-    }
+    const contactForm = document.getElementById('contact-form');
+    
+    contactForm?.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = this.querySelector('.form-submit');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoading = submitBtn.querySelector('.btn-loading');
+        
+        // Show loading state
+        submitBtn.disabled = true;
+        btnText.style.display = 'none';
+        btnLoading.style.display = 'inline';
+        
+        // Get form data
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+        
+        try {
+            // Simulate form submission (replace with actual endpoint)
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // Show success message
+            showToast('Message sent successfully! I\'ll get back to you soon.', 'success');
+            this.reset();
+            
+        } catch (error) {
+            // Show error message
+            showToast('Failed to send message. Please try again later.', 'error');
+        } finally {
+            // Reset button state
+            submitBtn.disabled = false;
+            btnText.style.display = 'inline';
+            btnLoading.style.display = 'none';
+        }
+    });
 }
 
-async function handleFormSubmit(event) {
-    event.preventDefault();
-    
-    const submitButton = contactForm.querySelector('.form-submit');
-    const formData = new FormData(contactForm);
-    
-    // Show loading state
-    submitButton.classList.add('loading');
-    submitButton.disabled = true;
-    
-    try {
-        // Simulate form submission (replace with actual API call)
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        // Show success message
-        showToast('Message sent successfully! I\'ll get back to you soon.', 'success');
-        
-        // Reset form
-        contactForm.reset();
-        
-    } catch (error) {
-        // Show error message
-        showToast('Failed to send message. Please try again.', 'error');
-    } finally {
-        // Reset button state
-        submitButton.classList.remove('loading');
-        submitButton.disabled = false;
-    }
-}
-
-// Toast Notifications
-function showToast(message, type = 'success') {
+function showToast(message, type = 'info') {
+    const toast = document.getElementById('toast');
     const toastMessage = document.getElementById('toast-message');
     
-    if (toast && toastMessage) {
-        toastMessage.textContent = message;
-        toast.className = `toast ${type}`;
-        toast.classList.add('show');
-        
-        // Auto hide after 4 seconds
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 4000);
-    }
+    if (!toast || !toastMessage) return;
+    
+    toastMessage.textContent = message;
+    toast.className = `toast ${type} show`;
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 5000);
 }
 
-// Parallax Effect
-function initializeParallax() {
-    const parallaxElements = document.querySelectorAll('.parallax-slow');
+// Scroll progress
+function initializeScrollProgress() {
+    const progressBar = document.getElementById('progress-bar');
+    
+    if (!progressBar) return;
     
     window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const rate = scrolled * -0.5;
-        
-        parallaxElements.forEach(element => {
-            element.style.transform = `translateY(${rate}px)`;
-        });
+        const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        progressBar.style.width = `${Math.min(scrolled, 100)}%`;
     });
 }
 
-// Scroll Event Handler
-function handleScroll() {
-    updateScrollProgress();
-    updateActiveSection();
-    handleHeaderBackground();
-}
-
-function updateActiveSection() {
-    const sections = document.querySelectorAll('section[id]');
-    const headerHeight = header ? header.offsetHeight : 0;
+// Animations
+function initializeAnimations() {
+    // Floating elements animation
+    const floatingElements = document.querySelectorAll('.floating-orb, .gradient-orb');
     
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - headerHeight - 100;
-        const sectionBottom = sectionTop + section.offsetHeight;
-        const scrollPosition = window.scrollY;
+    floatingElements.forEach((element, index) => {
+        const delay = index * 0.5;
+        const duration = 3 + Math.random() * 2;
         
-        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-            updateActiveNavigation(section.id);
-        }
+        element.style.animationDelay = `${delay}s`;
+        element.style.animationDuration = `${duration}s`;
+    });
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for animation
+    const animateElements = document.querySelectorAll(
+        '.hero-content, .about-content, .projects-container, .skills-content, .contact-content'
+    );
+    
+    animateElements.forEach(element => {
+        observer.observe(element);
     });
 }
 
-function handleHeaderBackground() {
-    if (header) {
-        if (window.scrollY > 100) {
-            header.style.background = isDarkMode 
-                ? 'rgba(15, 23, 42, 0.95)' 
-                : 'rgba(255, 255, 255, 0.95)';
-            header.style.backdropFilter = 'blur(20px)';
-        } else {
-            header.style.background = isDarkMode 
-                ? 'rgba(15, 23, 42, 0.9)' 
-                : 'rgba(255, 255, 255, 0.9)';
-            header.style.backdropFilter = 'blur(12px)';
-        }
-    }
-}
-
-// Resize Event Handler
-function handleResize() {
-    // Close mobile menu on resize to desktop
-    if (window.innerWidth >= 768 && isMobileMenuOpen) {
-        toggleMobileMenu();
-    }
-}
-
-// Utility Functions
-function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    }
-}
-
+// Utility functions
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -435,37 +492,21 @@ function debounce(func, wait) {
     };
 }
 
-// Keyboard Navigation
-document.addEventListener('keydown', function(event) {
-    // Close mobile menu with Escape key
-    if (event.key === 'Escape' && isMobileMenuOpen) {
-        toggleMobileMenu();
-    }
-    
-    // Theme toggle with Ctrl/Cmd + D
-    if ((event.ctrlKey || event.metaKey) && event.key === 'd') {
-        event.preventDefault();
-        toggleDarkMode();
+// Optimized scroll handler
+const optimizedScrollHandler = debounce(() => {
+    updateActiveNavigation();
+}, 16); // ~60fps
+
+window.addEventListener('scroll', optimizedScrollHandler);
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeProjectModal();
+        // Close mobile menu if open
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+        mobileMenuToggle?.classList.remove('active');
+        mobileNav?.classList.remove('active');
     }
 });
-
-// Add loading class to images for better UX
-document.addEventListener('DOMContentLoaded', function() {
-    const images = document.querySelectorAll('img');
-    images.forEach(img => {
-        if (!img.complete) {
-            img.classList.add('loading');
-            img.addEventListener('load', function() {
-                this.classList.remove('loading');
-                this.classList.add('loaded');
-            });
-        }
-    });
-});
-
-// Export functions for external use
-window.portfolioApp = {
-    scrollToSection,
-    toggleDarkMode,
-    showToast
-};
