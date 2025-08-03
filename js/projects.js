@@ -20,28 +20,26 @@ const projects = [
             { name: "Prototyping", icon: "🔗" },
         ],
         features: [
-            "Real-time analytics dashboard",
-            "Inventory management system",
-            "Customer insights and reports",
+             "AR try-on feature",
+            "Jewelry catalog browsing",
+            "Wishlist management",
             "Responsive design",
-            "Dark/Light mode support"
+            "User-friendly interface"
         ]
     },
     {
         id: 2,
-        title: "Mobile Banking App",
-        description: "A modern mobile banking application with intuitive UX, biometric authentication, and seamless transaction management.",
-        category: "Mobile Design",
+        title: "VR Gaming Website",
+        description: "VORNEA VR Games offers users unlimited access to a vast library of VR games, allowing them to immerse themselves in diverse and captivating worlds.",
+        category: "Web Development",
         tags: ["UI/UX", "Figma", "Prototyping"],
-        image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop",
+        image: "VR Gaming website cover page.svg",
         featured: true,
-        demoUrl: "https://banking-app-prototype.figma.com",
-        codeUrl: "https://github.com/rasikadesigns/banking-app",
+        demoUrl: "https://www.figma.com/proto/eVUD2bPoDffpz2m8VfpFIl/VR-Games-Website?page-id=0%3A1&node-id=439-2&viewport=-4627%2C247%2C0.57&t=B5KfdFmtMgU8PofI-1&scaling=scale-down-width&content-scaling=fixed",
         status: "completed",
         year: 2024,
         duration: "4 months",
         technologies: [
-            { name: "React Native", icon: "📱" },
             { name: "Figma", icon: "🎨" },
             { name: "Prototyping", icon: "🔗" },
             { name: "UI/UX Design", icon: "✨" }
@@ -56,23 +54,21 @@ const projects = [
     },
     {
         id: 3,
-        title: "SaaS Landing Page",
-        description: "High-converting landing page for a SaaS product with modern design, smooth animations, and optimized conversion funnels.",
-        category: "Web Development",
-        tags: ["Next.js", "Framer Motion", "SEO", "Conversion Optimization"],
-        image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=600&fit=crop",
-        featured: false,
-        demoUrl: "https://saas-landing-demo.vercel.app",
-        codeUrl: "https://github.com/rasikadesigns/saas-landing",
+        title: "Wealth Management Application",
+        description: "Wealth Craft is a wealth management app which empowers users to take control of their finances by offering tools for tracking expenses, setting budgets, and achieving savings goals, customizable budgets, and detailed financial reports. ",
+        category: "Mobile Design",
+        tags: ["Figma", "Prototyping", "UI/UX Design", "UX Case Study"],
+        image: "Wealth Cover Page.svg",
+        featured: true,
+        demoUrl: "https://www.figma.com/proto/vZo2nCGRH7Ol9uwce77Pcs/Wealth-Craft?page-id=0%3A1&node-id=2113-1347&viewport=-5813%2C725%2C0.27&t=76Rj6N7Ni7B71lfk-1&scaling=min-zoom&content-scaling=fixed",
         status: "completed",
         year: 2024,
-        client: "CloudSync Inc.",
-        duration: "2 months",
+        duration: "4 months",
         technologies: [
-            { name: "Next.js", icon: "▲" },
-            { name: "Framer Motion", icon: "🎭" },
-            { name: "SEO", icon: "🔍" },
-            { name: "Analytics", icon: "📈" }
+            { name: "Figma", icon: "▲" },
+            { name: "Prototyping", icon: "🎭" },
+            { name: "UI/UX Design", icon: "🔍" },
+            { name: "UX Case Study", icon: "📈" }
         ],
         features: [
             "Smooth scroll animations",
@@ -84,18 +80,17 @@ const projects = [
     },
     {
         id: 4,
-        title: "Task Management Tool",
-        description: "Collaborative task management platform with real-time updates, team collaboration features, and productivity analytics.",
+        title: "HR Management Dashboard",
+        description: "VisionPro HR Dashboard enhances HR operations with features like Recruitment Tracker, Attendance and Leave Management, and Diversity Metrics.",
         category: "Web Development",
-        tags: ["Vue.js", "Node.js", "Socket.io", "MongoDB"],
-        image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop",
+        tags: ["Figma", "Dashboard design", "UI/UX Design"],
+        image: "dashboard cover page.svg",
         featured: false,
-        demoUrl: "https://task-manager-demo.herokuapp.com",
-        codeUrl: "https://github.com/rasikadesigns/task-manager",
+        demoUrl: "https://www.figma.com/proto/fk4RYx9LTCkGsVgCxJ7q5e/Dashboard?page-id=0%3A1&node-id=196-2&viewport=-1327%2C222%2C0.19&t=ODLZ6AGInxAnzsoF-1&scaling=min-zoom&content-scaling=fixed",
         status: "completed",
         year: 2023,
         client: "Personal Project",
-        duration: "5 months",
+        duration: "1 month",
         technologies: [
             { name: "Vue.js", icon: "💚" },
             { name: "Node.js", icon: "🟢" },
@@ -166,34 +161,6 @@ const projects = [
             "User reviews"
         ]
     },
-    {
-    id: 6,
-    title: "Wealth Management App",
-    description: "Managing wealth ani barach kahi",
-    category: "Web Design",
-    tags: ["Flutter", "Firebase", "UI/UX", "FinTech"],
-    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop",
-    featured: true,
-    demoUrl: "https://www.figma.com/proto/vZo2nCGRH7Ol9uwce77Pcs/Wealth-Craft?page-id=461%3A504&node-id=461-1386&viewport=754%2C563%2C0.09&t=klhCtuH8nAXYrW2d-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=461%3A4162&show-proto-sidebar=1",
-    codeUrl: "https://github.com/rasikadesigns/restaurant-app",
-    status: "in-progress",
-    year: 2024,
-    client: "Hota koni tari",
-    duration: "3 months",
-    technologies: [
-        { name: "Flutter", icon: "💙" },
-        { name: "Firebase", icon: "🔥" },
-        { name: "UI/UX Design", icon: "✨" },
-        { name: "FinTech", icon: "" }
-    ],
-    features: [
-        "Paishe sambhalne",
-        "Paishe kamavne",
-        "Paishe sathavne",
-        "Paishe kharch karne",
-        "Paishancha maaz karne"
-    ]
-    }
 ];
 
 // Project categories for filtering
