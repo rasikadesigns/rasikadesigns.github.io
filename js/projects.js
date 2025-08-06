@@ -58,7 +58,7 @@ const projects = [
         description: "Wealth Craft is a wealth management app which empowers users to take control of their finances by offering tools for tracking expenses, setting budgets, and achieving savings goals, customizable budgets, and detailed financial reports. ",
         category: "Mobile Design",
         tags: ["Figma", "Prototyping", "UI/UX Design", "UX Case Study"],
-        image: "Wealth Cover Page.svg",
+        image: "Wealth Cover page.svg",
         featured: true,
         demoUrl: "https://www.figma.com/proto/vZo2nCGRH7Ol9uwce77Pcs/Wealth-Craft?page-id=0%3A1&node-id=2113-1347&viewport=-5813%2C725%2C0.27&t=76Rj6N7Ni7B71lfk-1&scaling=min-zoom&content-scaling=fixed",
         status: "completed",
