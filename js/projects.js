@@ -3,8 +3,8 @@
 
 const projects = [
     {
-        id: 1,
-        title: "Jewelry Application",
+        id: 1,  
+        title: "Jewelry <br>Application",
         description: "Divine Vista is a jewelry app designed to enhance the online shopping experience with advanced features like Augmented Reality (AR) try-on.",
         category: "Mobile Design",
         tags: ["UI/UX Design", "Figma", "Prototyping", "Responsive Design"],
@@ -29,7 +29,7 @@ const projects = [
     },
     {
         id: 2,
-        title: "VR Gaming Website",
+        title: "VR Gaming <br>Website</br>",
         description: "VORNEA VR Games offers users unlimited access to a vast library of VR games, allowing them to immerse themselves in diverse and captivating worlds.",
         category: "Web Development",
         tags: ["UI/UX", "Figma", "Prototyping"],
@@ -55,7 +55,7 @@ const projects = [
     {
         id: 3,
         title: "Wealth Management Application",
-        description: "Wealth Craft is a wealth management app which empowers users to take control of their finances by offering tools for tracking expenses, setting budgets, and achieving savings goals, customizable budgets, and detailed financial reports. ",
+        description: "Wealth Craft is a wealth management app that helps users track expenses, set customizable budgets, and achieve savings goals with detailed financial reports. ",
         category: "Mobile Design",
         tags: ["Figma", "Prototyping", "UI/UX Design", "UX Case Study"],
         image: "Wealth Cover page.svg",

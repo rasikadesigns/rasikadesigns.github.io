@@ -34,7 +34,7 @@ html {
 }
 
 body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'poppins', system-ui, -apple-system, sans-serif;
     line-height: 1.6;
     color: var(--color-foreground);
     background-color: var(--color-background);
@@ -586,6 +586,14 @@ section {
     position: relative;
     opacity: 0;
     transform: translateY(30px);
+}
+/* for Project Deatil card Color Force we attach White color  */
+:root {
+    --color-card: #ffffff; /* White in light mode */
+}
+
+[data-theme="dark"] {
+    --color-card: #1a1a1a; /* Dark gray in dark mode */
 }
 
 .project-card.animate-in {
