@@ -6,7 +6,7 @@
 <title>Rasika Deshmukh — UI/UX Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Montserrat:wght@600&display=swap" rel="stylesheet" />
 
 <style>
 /* ─── GOOGLE SANS FONT FACE ─────────────────────────────── */
@@ -29,13 +29,13 @@
   src: url(https://fonts.gstatic.com/s/googlesans/v58/4UabrENHsxJlGDuGo1OIlL3Kwp5SKQ.woff2) format('woff2');
 }
 @font-face {
-  font-family: 'Google Sans Display';
+  font-family: 'Google Sans';
   font-style: normal;
   font-weight: 400;
   src: url(https://fonts.gstatic.com/s/googlesansdisplay/v20/GgdHEhRXAx9IkNPuFAKl2mOwEAoXisMCaA.woff2) format('woff2');
 }
 @font-face {
-  font-family: 'Google Sans Display';
+  font-family: 'Google Sans';
   font-style: normal;
   font-weight: 700;
   src: url(https://fonts.gstatic.com/s/googlesansdisplay/v20/GgdEEhRXAx9IkNPuFAKl2mOwEAoXisMCaA.woff2) format('woff2');
@@ -52,8 +52,8 @@
   --orange:    #ff6b35;
   --white:     #f0f0f8;
   --muted:     rgba(240,240,248,0.45);
-  --font-gs:   'Google Sans', 'Google Sans', 'DM Sans', sans-serif;
-  --font-gsd:  'Google Sans', 'Google Sans', 'DM Sans', sans-serif;
+  --font-gs:   'Google Sans', 'Google Sans Display', 'DM Sans', sans-serif;
+  --font-gsd:  'Google Sans Display', 'Google Sans', 'DM Sans', sans-serif;
   --font-body: 'DM Sans', sans-serif;
   --ease:      cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -113,14 +113,14 @@ body::before {
 .project-cursor {
   position: fixed;
   top: 0; left: 0;
-  width: 136px; height: 136px;
+  width: 200px; height: 80px;
   border-radius: 50%;
   background: var(--neon);
   color: var(--bg);
   font-family: var(--font-gs);
   font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.00em;
   text-transform: uppercase;
   display: flex; align-items: center; justify-content: center;
   text-align: center;
@@ -241,13 +241,18 @@ nav {
 .hero-title {
   font-family: var(--font-gsd);
   font-size: clamp(64px, 9vw, 130px);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 0.92;
   letter-spacing: -0.03em;
   margin-bottom: 40px;
   max-width: 900px;
 }
-.hero-title em { font-style:normal; -webkit-text-stroke:0.1px rgba(240,240,248,0.3); color:transparent; }
+.hero-title em {
+  font-family: 'Google Sans', sans-serif;
+  font-style: normal;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.3);
+  color: transparent;
+}
 .hero-title .accent { color: var(--neon); }
 .hero-bottom {
   display: flex; align-items: flex-end; justify-content: space-between;
@@ -901,7 +906,7 @@ footer{
     Crafting<br /><em>Digital</em><br /><span class="accent">Experiences</span>
   </h1>
   <div class="hero-bottom">
-    <p class="hero-tagline">I'm Rasika Deshmukh — a UI/UX designer who turns complex ideas into intuitive, beautiful digital products that people love to use.</p>
+    <p class="hero-tagline">I'm Rasika Deshmukh - a UI/UX designer who turns complex ideas into intuitive, beautiful digital products that people love to use.</p>
     <div class="hero-ctas">
       <a href="#projects" class="btn-primary">View My Work</a>
       <a href="#connect" class="btn-outline">Connect</a>
@@ -941,7 +946,7 @@ footer{
   </div>
   <div class="about-right">
     <div class="about-bio-label section-label">About Me</div>
-    <p class="about-bio">I'm a <strong>junior UI/UX designer</strong> with 2+ years of experience designing for SaaS platforms and consumer applications where clarity meets delight.</p>
+    <p class="about-bio">I'm a <strong>UI/UX designer</strong> with 2+ years of experience designing for SaaS platforms and consumer applications where clarity meets delight.</p>
     <p class="about-bio-sub">My process begins with deep user empathy and ends with pixel-perfect execution. I believe great design is invisible, it simply feels right. When I'm not pushing pixels, you'll find me analyzing design trends or obsessing over typography.</p>
     <p class="skills-title">Core Skills</p>
     <div class="skills-grid">
@@ -1124,7 +1129,7 @@ footer{
     </div>
     <div class="case-panel-body">
       <div class="case-panel-eyebrow">Case Study 01</div>
-      <h2 class="case-panel-title">Nexus SaaS <span class="acc">Dashboard</span></h2>
+      <h2 class="case-panel-title">Wealth Mannagement <span class="acc">Dashboard</span></h2>
       <p class="case-panel-desc">Nexus was drowning in its own complexity — a sprawling analytics platform with 200+ features, a 6-week onboarding curve, and a 42% churn rate. My mission: rebuild the entire experience from the ground up, making power users faster and novices instantly productive.</p>
       <div class="case-stats">
         <div><div class="case-stat-val">38%</div><div class="case-stat-lbl">Churn reduction</div></div>
